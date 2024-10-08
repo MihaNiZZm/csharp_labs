@@ -8,7 +8,7 @@ namespace HackathonApp
             IEnumerable<Wishlist> teamLeadsWishlists, IEnumerable<Wishlist> juniorsWishlists)
         {
             double totalSatisfaction = 0;
-            int participants = teams.Count() * 2; // Так как в команде два участника
+            double participants = teams.Count() * 2; // Так как в команде два участника
 
             foreach (var team in teams)
             {
@@ -17,10 +17,10 @@ namespace HackathonApp
                 var juniorSatisfaction = SatisfactionCalculator
                     .CalculateSatisfaction(juniorsWishlists.First(w => w.EmployeeId == team.Junior.Id), team.Teamlead.Id);
 
-                totalSatisfaction += leadSatisfaction + juniorSatisfaction;
+                totalSatisfaction += 1f / leadSatisfaction + 1f / juniorSatisfaction;
             }
 
-            return totalSatisfaction / participants;
+            return participants / totalSatisfaction;
         }
     }
 }

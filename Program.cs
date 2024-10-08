@@ -15,15 +15,11 @@ namespace HackathonApp
             var juniors = DataLoader.LoadEmployees(juniorsFilePath);
             var teamLeads = DataLoader.LoadEmployees(teamLeadsFilePath);
 
-            // Генерируем случайные вишлисты
-            var juniorWishlists = DataLoader.GenerateRandomWishlists(juniors, teamLeads);
-            var teamLeadWishlists = DataLoader.GenerateRandomWishlists(teamLeads, juniors);
-
             // Создаём стратегию формирования команд
             ITeamBuildingStrategy strategy = new SimpleTeamBuildingStrategy();
 
             // Симуляция хакатонов (например, 1000)
-            HackathonSimulator.SimulateHackathons(1000, strategy, teamLeads, juniors, teamLeadWishlists, juniorWishlists);
+            HackathonSimulator.SimulateHackathons(1000, strategy, teamLeads, juniors);
         }
     }
 }
