@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace HackathonApp
 {
@@ -7,19 +9,19 @@ namespace HackathonApp
     {
         static void Main(string[] args)
         {
-            // Пути к файлам
-            string juniorsFilePath = "Juniors20.csv";
-            string teamLeadsFilePath = "Teamleads20.csv";
+            var host = Host.CreateDefaultBuilder(args)
+                .ConfigureServices((hostContext, services) =>
+                {
+                    services.AddSingleton<DataLoader>();
+                    services.AddSingleton<HarmonyCalculator>();
+                    services.AddSingleton<SatisfactionCalculator>();
+                    services.AddTransient<ITeamBuildingStrategy, SimpleTeamBuildingStrategy>();
+                    services.AddTransient<HackathonSimulator>();
+                    services.AddHostedService<HackathonWorker>();
+                })
+                .Build();
 
-            // Загружаем джунов и тимлидов
-            var juniors = DataLoader.LoadEmployees(juniorsFilePath);
-            var teamLeads = DataLoader.LoadEmployees(teamLeadsFilePath);
-
-            // Создаём стратегию формирования команд
-            ITeamBuildingStrategy strategy = new SimpleTeamBuildingStrategy();
-
-            // Симуляция хакатонов (например, 1000)
-            HackathonSimulator.SimulateHackathons(1000, strategy, teamLeads, juniors);
+            host.Run();
         }
     }
 }
