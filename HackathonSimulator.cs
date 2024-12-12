@@ -1,23 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace HackathonApp
+﻿namespace HackathonApp
 {
     public class HackathonSimulator
     {
-        private readonly ITeamBuildingStrategy _strategy;
-        private readonly HarmonyCalculator _harmonyCalculator;
-        private readonly DataLoader _dataLoader;
+        private readonly IHrManager _hrManager;
+        private readonly IHrDirector _hrDirector;
 
-        public HackathonSimulator(
-            ITeamBuildingStrategy strategy,
-            HarmonyCalculator harmonyCalculator,
-            DataLoader dataLoader)
+        public HackathonSimulator(IHrManager hrManager, IHrDirector hrDirector)
         {
-            _strategy = strategy;
-            _harmonyCalculator = harmonyCalculator;
-            _dataLoader = dataLoader;
+            _hrManager = hrManager;
+            _hrDirector = hrDirector;
         }
 
         public void SimulateHackathons(int iterations, IEnumerable<Employee> teamLeads, IEnumerable<Employee> juniors)
@@ -25,10 +16,10 @@ namespace HackathonApp
             double totalHarmony = 0;
             for (int i = 0; i < iterations; i++)
             {
-                var juniorWishlists = _dataLoader.GenerateRandomWishlists(juniors, teamLeads);
-                var teamLeadWishlists = _dataLoader.GenerateRandomWishlists(teamLeads, juniors);
-                var teams = _strategy.BuildTeams(teamLeads, juniors, teamLeadWishlists, juniorWishlists);
-                var harmony = _harmonyCalculator.CalculateHarmony(teams, teamLeadWishlists, juniorWishlists);
+                var juniorWishlists = _hrManager.GenerateRandomWishlists(juniors, teamLeads);
+                var teamLeadWishlists = _hrManager.GenerateRandomWishlists(teamLeads, juniors);
+                var teams = _hrManager.BuildTeams(teamLeads, juniors, teamLeadWishlists, juniorWishlists);
+                var harmony = _hrDirector.CalculateOverallTeamsHarmony(teams, teamLeadWishlists, juniorWishlists);
                 totalHarmony += harmony;
                 Console.WriteLine($"Hackathon {i + 1}: Harmony = {harmony}");
             }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HackathonApp
+﻿namespace HackathonApp
 {
     public record Employee(int Id, string Name);
 }

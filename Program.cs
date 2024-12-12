@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace HackathonApp
@@ -13,8 +11,9 @@ namespace HackathonApp
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddSingleton<DataLoader>();
-                    services.AddSingleton<HarmonyCalculator>();
-                    services.AddSingleton<SatisfactionCalculator>();
+                    services.AddSingleton<IHarmonyCalculator, HarmonyCalculator>();
+                    services.AddSingleton<IHrDirector, HrDirector>();
+                    services.AddSingleton<IHrManager, HrManager>();
                     services.AddTransient<ITeamBuildingStrategy, SimpleTeamBuildingStrategy>();
                     services.AddTransient<HackathonSimulator>();
                     services.AddHostedService<HackathonWorker>();

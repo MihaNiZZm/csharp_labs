@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackathonApp", "HackathonApp.csproj", "{53BBAC26-A6F7-4AC1-AF73-FAAD8CA3077D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackathonApp", "HackathonApp.csproj", "{53BBAC26-A6F7-4AC1-AF73-FAAD8CA3077D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackathonAppTests", "..\HackatonAppTests\HackathonAppTests.csproj", "{52984D6C-DBC0-48E8-80BA-5FEC44B81091}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{53BBAC26-A6F7-4AC1-AF73-FAAD8CA3077D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53BBAC26-A6F7-4AC1-AF73-FAAD8CA3077D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53BBAC26-A6F7-4AC1-AF73-FAAD8CA3077D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52984D6C-DBC0-48E8-80BA-5FEC44B81091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52984D6C-DBC0-48E8-80BA-5FEC44B81091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52984D6C-DBC0-48E8-80BA-5FEC44B81091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52984D6C-DBC0-48E8-80BA-5FEC44B81091}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

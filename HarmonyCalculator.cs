@@ -1,31 +1,18 @@
 ﻿namespace HackathonApp
 {
-    public class HarmonyCalculator
+    public class HarmonyCalculator : IHarmonyCalculator
     {
-        private readonly SatisfactionCalculator _satisfactionCalculator;
-
-        public HarmonyCalculator(SatisfactionCalculator satisfactionCalculator)
+        public double СalculateTotalHarmony(IEnumerable<int> satisfactions)
         {
-            _satisfactionCalculator = satisfactionCalculator;
-        }
+            int size = satisfactions.Count();
+            double sum = 0;
 
-        public double CalculateHarmony(IEnumerable<Team> teams,
-            IEnumerable<Wishlist> teamLeadsWishlists, IEnumerable<Wishlist> juniorsWishlists)
-        {
-            double totalSatisfaction = 0;
-            double participants = teams.Count() * 2;
-
-            foreach (var team in teams)
+            foreach (var s in satisfactions)
             {
-                var leadSatisfaction = _satisfactionCalculator
-                    .CalculateSatisfaction(teamLeadsWishlists.First(w => w.EmployeeId == team.Teamlead.Id), team.Junior.Id);
-                var juniorSatisfaction = _satisfactionCalculator
-                    .CalculateSatisfaction(juniorsWishlists.First(w => w.EmployeeId == team.Junior.Id), team.Teamlead.Id);
-
-                totalSatisfaction += 1f / leadSatisfaction + 1f / juniorSatisfaction;
+                sum += 1 / (double)s;
             }
 
-            return participants / totalSatisfaction;
+            return size / sum;
         }
     }
     
